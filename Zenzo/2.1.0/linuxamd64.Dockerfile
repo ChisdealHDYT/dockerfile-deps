@@ -8,10 +8,13 @@ ENV ZENZO_VERSION 2.1.0
 ENV ZENZO_URL https://github.com/ZENZO-Ecosystem/ZENZO-Core/releases/download/v2.1.0/zenzo-2.1.0-x86_64-linux-gnu.tar.gz
 ENV ZENZO_SHA256 1f3a85d2344bd92255b438a15ed4fd04398b5a78e0ee42133798ff49a554e72d
 
+ENV ZENZO_URL_SH https://raw.githubusercontent.com/ChisdealHDYT/dockerfile-deps/master/Zenzo/2.1.0/docker-entrypoint.sh
+
 # install zenzo binaries
 RUN set -ex \
 	&& cd /tmp \
 	&& wget -qO zenzo.tar.gz "$ZENZO_URL" \
+	&& wget -qO docker-entrypoint.sh "$ZENZO_URL_SH" \
 	&& echo "$ZENZO_SHA256 zenzo.tar.gz" | sha256sum -c - \
 	&& mkdir bin \
 	&& tar -xzvf zenzo.tar.gz -C /tmp/bin --strip-components=2 "zenzo-$ZENZO_VERSION/bin/zenzo-cli" "zenzo-$ZENZO_VERSION/bin/zenzod" \

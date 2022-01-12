@@ -18,16 +18,16 @@ if [[ "$1" == "zenzo-cli" || "$1" == "zenzo-tx" || "$1" == "zenzod" || "$1" == "
 	rpcallowip=::/0
 	${BITCOIN_EXTRA_ARGS}
 	EOF
-	chown bitcoin:bitcoin "$BITCOIN_DATA/zenzo.conf"
+	chown zenzo:zenzo "$BITCOIN_DATA/zenzo.conf"
 
 	# ensure correct ownership and linking of data directory
 	# we do not update group ownership here, in case users want to mount
 	# a host directory and still retain access to it
-	chown -R bitcoin "$BITCOIN_DATA"
-	ln -sfn "$BITCOIN_DATA" /home/bitcoin/.zenzo
-	chown -h bitcoin:bitcoin /home/bitcoin/.zenzo
+	chown -R zenzo "$BITCOIN_DATA"
+	ln -sfn "$BITCOIN_DATA" /home/zenzo/.zenzo
+	chown -h bzenzo:zenzo /home/zenzo/.zenzo
 
-	exec gosu bitcoin "$@"
+	exec gosu zenzo "$@"
 else
 	exec "$@"
 fi
